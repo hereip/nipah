@@ -1,0 +1,51 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# .NET build output
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+artifacts/
+TestResults/
+*.log
+
+# Visual Studio / MSBuild
+*.userprefs
+*.cache
+project.lock.json
+project.fragment.lock.json
+*.nupkg
+*.snupkg
+
+# NuGet
+.nuget/
+packages/
+
+# Publish output
+publish/
+[Pp]ublish/
+
+# Windows-generated files
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Editor settings
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# Local environment files
+.env
+.env.*
+!.env.example
