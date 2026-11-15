@@ -1,122 +1,122 @@
 # Nipah
 
-**A highly customizable terminal emulator for Windows.**
+**Гибко настраиваемый эмулятор терминала для Windows.**
 
-Nipah is a concept for a modern Windows terminal built around the visual language of Windows 11 and the freedom to customize almost everything.
+Nipah — концепт современного терминала для Windows, основанного на визуальном языке Windows 11 и предоставляющего пользователю широкие возможности настройки.
 
-The goal is to combine a comfortable, familiar interface with a powerful terminal experience, playful details, and tools that let users make the application their own.
+Цель проекта — объединить привычный и удобный интерфейс, полноценную работу с терминалом, интересные детали и инструменты, с помощью которых каждый сможет настроить приложение под себя.
 
-> **Project status:** Concept / pre-development. Nipah is not ready for everyday use yet. The features described below are planned ideas, not implemented functionality.
+> **Статус проекта:** концепция / до начала разработки. Nipah пока не готов к повседневному использованию. Все описанные ниже функции — идеи и планы, а не реализованные возможности.
 
-## Vision
+## Концепция
 
-Nipah aims to be more than a terminal with a different color scheme. It should provide a flexible workspace that can adapt to different workflows and personal styles.
+Nipah должен быть не просто терминалом с другой цветовой схемой. Это гибкое рабочее пространство, которое можно адаптировать под разные задачи и личные предпочтения.
 
-The visual direction takes inspiration from Windows 11 and Fluent Design:
+Визуальное направление вдохновлено Windows 11 и Fluent Design:
 
-- Rounded surfaces and thoughtful spacing.
-- Optional Mica and Acrylic-inspired materials.
-- Smooth, configurable animations.
-- Light and dark appearance modes.
-- User-defined accent colors and palettes.
+- Скруглённые элементы и продуманные отступы.
+- Необязательные эффекты в духе Mica и Acrylic.
+- Плавные анимации с возможностью настройки.
+- Светлая и тёмная темы.
+- Пользовательские акцентные цвета и палитры.
 
-The interface should remain useful and readable whether it is minimally configured or heavily customized.
+Интерфейс должен оставаться удобным и читаемым как при минимальной настройке, так и при глубокой кастомизации.
 
-## Planned features
+## Планируемые возможности
 
-All features in this section are part of the current concept and may change during development.
+Все функции в этом разделе относятся к текущей концепции и могут измениться в процессе разработки.
 
-### Terminal
+### Терминал
 
-- Run real shell sessions instead of simulating command execution.
-- PowerShell support as the primary experience.
-- Multiple terminal tabs.
-- Configurable terminal profiles.
-- A foundation for additional shells in the future.
+- Запуск настоящих оболочек, а не имитация выполнения команд.
+- PowerShell в качестве основной оболочки.
+- Несколько вкладок терминала.
+- Настраиваемые профили терминала.
+- Возможность добавить поддержку других оболочек в будущем.
 
-### Deep customization
+### Глубокая кастомизация
 
-- Custom colors and complete color palettes.
-- Font family, size, and text appearance settings.
-- Cursor style and behavior.
-- Background colors and images.
-- Transparency and visual effects.
-- Configurable animations.
-- Customizable panels and layouts.
-- Import and export of themes and configuration presets.
+- Настройка отдельных цветов и полноценных цветовых палитр.
+- Выбор шрифта, размера и параметров отображения текста.
+- Настройка стиля и поведения курсора.
+- Цветные фоны и изображения.
+- Прозрачность и визуальные эффекты.
+- Настраиваемые анимации.
+- Изменяемые панели и раскладки интерфейса.
+- Импорт и экспорт тем и наборов настроек.
 
 ### Friendly Errors
 
-PowerShell errors can be intimidating and difficult to read. Nipah is planned to offer alternative visual presentations for common errors.
+Ошибки PowerShell иногда выглядят пугающе и их бывает сложно понять. Nipah планируется дополнить альтернативным отображением распространённых ошибок.
 
-Possible modes:
+Предполагаемые режимы:
 
-- **Original** — show the original shell output.
-- **Friendly** — explain errors in clearer language.
-- **Funny** — use playful messages and optional character reactions.
+- **Original** — оригинальный вывод оболочки.
+- **Friendly** — объяснение ошибки простым и понятным языком.
+- **Funny** — забавные сообщения и необязательные реакции персонажей.
 
-The original error details should remain accessible. Friendly presentation must not change how PowerShell executes commands, its exit codes, or the underlying error information.
+Исходные сведения об ошибке всегда должны оставаться доступными. Дружелюбное отображение не должно менять выполнение команд PowerShell, коды завершения или исходную диагностическую информацию.
 
 ### Nipah Pets
 
-Optional desktop-style companions that react to terminal activity.
+Необязательные компаньоны, которые реагируют на происходящее в терминале.
 
-The concept includes:
+В концепцию входят:
 
-- Character animations and different moods.
-- Reactions to commands, successful operations, errors, and idle time.
-- A classic offline mode with predefined phrases.
-- An optional AI-powered mode for generated reactions.
-- Customizable characters, appearance, and reaction frequency.
+- Анимации персонажей и разные эмоции.
+- Реакции на команды, успешное выполнение операций, ошибки и простой.
+- Обычный офлайн-режим с заранее подготовленными фразами.
+- Дополнительный режим с ИИ для генерации реакций.
+- Настройка персонажей, внешнего вида и частоты реакций.
 
-One character idea is a chibi Civil Protection officer inspired by the world of *Half-Life 2*.
+Одна из идей персонажа — чиби-боец Гражданской обороны, вдохновлённый миром *Half-Life 2*.
 
-### Secret themes and easter eggs
+### Секретные темы и пасхалки
 
-Nipah may include hidden themes activated by special commands.
+В Nipah могут появиться скрытые темы, активируемые специальными командами.
 
-The current concept includes a `freeman` easter egg: a Combine-inspired interface theme with matching warning and error presentation. A `normal` command may return to the regular appearance.
+Одна из текущих идей — пасхалка `freeman`: тема интерфейса в стиле Альянса с соответствующими предупреждениями и оформлением ошибок. Команда `normal` может возвращать обычный внешний вид.
 
-These are optional visual easter eggs and should never interfere with normal shell commands.
+Это необязательные визуальные пасхалки, которые не должны мешать выполнению обычных команд оболочки.
 
-## Design principles
+## Принципы разработки
 
-1. **Customization first.** Users should be able to shape the interface to their preferences.
-2. **Real terminal behavior.** Nipah should host real shell processes, not imitate a command prompt.
-3. **Clarity.** Custom error presentation must preserve access to the original diagnostic information.
-4. **Optional extras.** Pets, AI reactions, effects, and playful features should be configurable or disableable.
-5. **User control.** Themes and visual settings should be easy to save, share, and restore.
+1. **Кастомизация прежде всего.** Пользователь должен иметь возможность настроить интерфейс под себя.
+2. **Полноценная работа терминала.** Nipah должен запускать настоящие процессы оболочки, а не имитировать командную строку.
+3. **Понятность.** Альтернативное отображение ошибок должно сохранять доступ к исходной диагностической информации.
+4. **Необязательные дополнения.** Питомцев, реакции ИИ, эффекты и развлекательные функции можно будет настраивать или отключать.
+5. **Контроль пользователя.** Темы и визуальные настройки должно быть легко сохранять, передавать другим и восстанавливать.
 
-## Technology direction
+## Технологическое направление
 
-The current technical direction for the Windows version is:
+Текущее предварительное направление разработки версии для Windows:
 
-- **C# and WinUI 3** for the native Windows application.
-- **Windows Pseudo Console (ConPTY)** for hosting real terminal processes.
-- **WebView2 and xterm.js** as a possible terminal rendering layer.
+- **C# и WinUI 3** — нативное приложение для Windows.
+- **Windows Pseudo Console (ConPTY)** — запуск настоящих процессов терминала.
+- **WebView2 и xterm.js** — возможный слой отображения терминала.
 
-This architecture is a starting point for investigation, not a final implementation decision.
+Это отправная точка для изучения, а не окончательное архитектурное решение.
 
-## Roadmap
+## План разработки
 
-The roadmap will be refined as the concept develops.
+План будет уточняться по мере развития концепции.
 
-- [x] Create the repository.
-- [x] Add the MIT license.
-- [x] Add a project-specific .gitignore.
-- [ ] Finalize the product concept and interface direction.
-- [ ] Define the application architecture.
-- [ ] Create the initial Windows application.
-- [ ] Implement a working terminal session.
-- [ ] Add tabs and terminal profiles.
-- [ ] Build the appearance and theme system.
-- [ ] Explore Friendly Errors.
-- [ ] Prototype Nipah Pets.
+- [x] Создать репозиторий.
+- [x] Добавить лицензию MIT.
+- [x] Добавить специальный .gitignore для проекта.
+- [ ] Завершить проработку концепции и направления дизайна.
+- [ ] Определить архитектуру приложения.
+- [ ] Создать начальное приложение для Windows.
+- [ ] Реализовать рабочую сессию терминала.
+- [ ] Добавить вкладки и профили терминала.
+- [ ] Разработать систему внешнего вида и тем.
+- [ ] Изучить и реализовать Friendly Errors.
+- [ ] Создать прототип Nipah Pets.
 
-## License
+## Лицензия
 
-Nipah is licensed under the [MIT License](LICENSE).
+Nipah распространяется под лицензией [MIT](LICENSE).
 
 ---
 
-Nipah is an independent project. Product ideas, features, and technical decisions may evolve as the project moves from concept to implementation.
+Nipah — независимый проект. Идеи, функции и технические решения могут меняться по мере перехода от концепции к разработке.
