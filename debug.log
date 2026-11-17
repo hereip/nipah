@@ -1,0 +1,24 @@
+[2026-11-17T07:08:06.285Z] Nipah starting...
+[2026-11-17T07:08:06.329Z] app is ready, calling createWindow
+[2026-11-17T07:08:06.773Z] webContents did-finish-load
+[2026-11-17T07:08:06.903Z] ready-to-show triggered, showing mainWindow
+[2026-11-17T07:22:44.110Z] Nipah starting...
+[2026-11-17T07:22:44.185Z] app is ready, calling createWindow
+[2026-11-17T07:22:44.723Z] webContents did-finish-load
+[2026-11-17T07:22:44.730Z] ready-to-show triggered, showing mainWindow
+[2026-11-17T08:02:49.927Z] Nipah starting...
+[2026-11-17T08:02:49.999Z] app is ready, calling createWindow
+[2026-11-17T08:02:50.519Z] webContents did-finish-load
+[2026-11-17T08:02:50.526Z] ready-to-show triggered, showing mainWindow
+[2026-11-17T11:04:30.931Z] Nipah starting...
+[2026-11-17T11:04:30.959Z] app is ready, calling createWindow
+[2026-11-17T11:04:31.215Z] webContents did-finish-load
+[2026-11-17T11:04:31.309Z] ready-to-show triggered, showing mainWindow
+[2026-11-17T11:35:49.924Z] Nipah starting...
+[2026-11-17T11:35:49.952Z] app is ready, calling createWindow
+[2026-11-17T11:35:50.358Z] webContents did-finish-load
+[2026-11-17T11:35:50.361Z] ready-to-show triggered, showing mainWindow
+[2026-11-17T11:36:17.482Z] Nipah starting...
+[2026-11-17T11:36:17.511Z] app is ready, calling createWindow
+[2026-11-17T11:36:17.777Z] webContents did-finish-load
+[2026-11-17T11:36:17.878Z] ready-to-show triggered, showing mainWindow

@@ -1,0 +1,24 @@
+{
+  "name": "nipah",
+  "version": "1.0.0",
+  "description": "Custom Windows 11 PowerShell Terminal Emulator with widgets and Fluent design",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "terminal",
+    "powershell",
+    "windows11",
+    "widgets",
+    "fluent"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@xterm/addon-fit": "^0.11.0",
+    "@xterm/xterm": "^6.0.0",
+    "electron": "^45.3.3",
+    "node-pty": "^1.1.0"
+  }
+}

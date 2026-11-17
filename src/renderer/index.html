@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>nipah - Windows 11 PowerShell Emulator</title>
+  <link rel="stylesheet" href="../../node_modules/@xterm/xterm/css/xterm.css">
+  <link rel="stylesheet" href="css/xterm-custom.css">
+  <link rel="stylesheet" href="css/fluent.css">
+</head>
+<body>
+  <div id="app-container">
+    <!-- Scanlines for secret Combine theme -->
+    <div class="scanlines-overlay"></div>
+
+    <!-- WinUI 3 Fluent Titlebar -->
+    <header id="titlebar">
+      <div class="titlebar-left">
+        <div class="app-brand">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm2 4l5 4-5 4V8zm7 8h6v2h-6v-2z"/>
+          </svg>
+          <span>nipah</span>
+        </div>
+
+        <nav id="tab-bar">
+          <!-- Dynamic Tabs -->
+          <button id="btn-new-tab" class="btn-new-tab" title="Новая вкладка (Ctrl+T)">+</button>
+        </nav>
+      </div>
+
+      <div class="titlebar-right">
+        <!-- Toggle Widgets Sidebar -->
+        <button id="btn-toggle-widgets" class="title-tool-btn active" title="Виджеты (Ctrl+B)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="15" y1="3" x2="15" y2="21"></line>
+          </svg>
+        </button>
+
+        <!-- Settings Modal Trigger -->
+        <button id="btn-settings" class="title-tool-btn" title="Настройки (Ctrl+,)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+
+        <!-- Standard Windows Window Controls -->
+        <button id="win-min" class="win-btn" title="Свернуть">&#x2014;</button>
+        <button id="win-max" class="win-btn" title="Развернуть">&#x25A2;</button>
+        <button id="win-close" class="win-btn close" title="Закрыть">&#x2715;</button>
+      </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main id="main-view">
+      <!-- Active Terminals -->
+      <section id="terminal-area">
+        <!-- Terminal Panes Injected by JS -->
+      </section>
+
+      <!-- WinUI 3 Widgets Sidebar -->
+      <aside id="widgets-sidebar">
+        <!-- Widget: Clock & Uptime -->
+        <div id="widget-clock" class="widget-card">
+          <div class="widget-header">
+            <span>Время и статус</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <div class="clock-display">
+            <span id="clock-time" class="clock-time">00:00:00</span>
+            <span id="clock-date" class="clock-date">--</span>
+            <span id="clock-uptime" class="clock-uptime">Аптайм: 0ч 0м</span>
+          </div>
+        </div>
+
+        <!-- Widget: Resource Telemetry -->
+        <div id="widget-system" class="widget-card">
+          <div class="widget-header">
+            <span>Мониторинг ПК</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+              <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+              <line x1="6" y1="6" x2="6.01" y2="6"></line>
+              <line x1="6" y1="18" x2="6.01" y2="18"></line>
+            </svg>
+          </div>
+          <div class="gauges-row">
+            <!-- CPU Gauge -->
+            <div class="gauge-item">
+              <svg class="gauge-svg" viewBox="0 0 80 80">
+                <circle class="gauge-bg" cx="40" cy="40" r="32"/>
+                <circle id="cpu-gauge-fill" class="gauge-fill" cx="40" cy="40" r="32"/>
+              </svg>
+              <span id="cpu-gauge-val" class="gauge-value">0%</span>
+              <span class="gauge-label">CPU</span>
+              <span id="cpu-gauge-cores" class="gauge-subtext">- ядер</span>
+            </div>
+
+            <!-- RAM Gauge -->
+            <div class="gauge-item">
+              <svg class="gauge-svg" viewBox="0 0 80 80">
+                <circle class="gauge-bg" cx="40" cy="40" r="32"/>
+                <circle id="ram-gauge-fill" class="gauge-fill ram" cx="40" cy="40" r="32"/>
+              </svg>
+              <span id="ram-gauge-val" class="gauge-value">0%</span>
+              <span class="gauge-label">RAM</span>
+              <span id="ram-gauge-used" class="gauge-subtext">- GB</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Widget: Terminal Pet Companion (Compact Card with AI Chat) -->
+        <div id="widget-pet" class="widget-card">
+          <div class="widget-header">
+            <span>Питомец Nipah</span>
+            <span id="pet-state-badge" class="pet-state-badge">Online</span>
+          </div>
+          <div id="pet-display" class="pet-container state-idle">
+            <div class="pet-avatar-wrapper">
+              <div class="pet-avatar">
+                <span id="pet-face">(•‿•)</span>
+              </div>
+              <span class="pet-name">Котик</span>
+            </div>
+            <div class="pet-dialog-col">
+              <div id="pet-bubble" class="pet-bubble">Nipah~! (≧◡≦)</div>
+              <span class="pet-hint">Кликните по котику или спросите:</span>
+            </div>
+          </div>
+          <div class="pet-ask-row">
+            <input type="text" id="pet-ask-input" class="pet-ask-input" placeholder="Спросить котика..." />
+            <button id="pet-ask-btn" class="pet-ask-btn" title="Отправить вопрос">🐾</button>
+          </div>
+        </div>
+
+        <!-- Widget: Quick Snippets -->
+        <div id="widget-snippets" class="widget-card">
+          <div class="widget-header">
+            <span>Быстрые команды</span>
+            <button id="btn-add-snippet" class="fluent-btn" style="padding: 2px 8px; font-size: 11px;" title="Добавить команду">+</button>
+          </div>
+          <div id="snippets-list" class="snippets-grid">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <!-- Widget: Git Repo Status -->
+        <div id="widget-git" class="widget-card" style="display: none;">
+          <div class="widget-header">
+            <span>Git Репозиторий</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="6" y1="3" x2="6" y2="15"></line>
+              <circle cx="18" cy="6" r="3"></circle>
+              <circle cx="6" cy="18" r="3"></circle>
+              <path d="M18 9a9 9 0 0 1-9 9"></path>
+            </svg>
+          </div>
+          <div class="git-info">
+            <span class="git-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="6" y1="3" x2="6" y2="21"></line>
+                <circle cx="18" cy="6" r="3"></circle>
+                <circle cx="6" cy="18" r="3"></circle>
+                <path d="M18 9a9 9 0 0 1-9 9"></path>
+              </svg>
+              <span id="git-branch">main</span>
+            </span>
+            <span id="git-changes" class="git-status-text">Чисто</span>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Bottom Status Bar -->
+    <footer id="status-bar">
+      <div class="status-left">
+        <span class="status-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="4 17 10 11 4 5"></polyline>
+            <line x1="12" y1="19" x2="20" y2="19"></line>
+          </svg>
+          PowerShell 5.1 / ConPTY
+        </span>
+        <span class="status-item">UTF-8</span>
+      </div>
+      <div class="status-right">
+        <span class="status-item">nipah v1.3.0 (WinUI 3 Fluent)</span>
+      </div>
+    </footer>
+
+    <!-- WinUI 3 Settings Modal -->
+    <div id="settings-modal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+            Параметры nipah
+          </div>
+          <button id="btn-close-settings" class="modal-close-btn">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="settings-section-title">Внешний вид и стиль</div>
+
+          <!-- Theme -->
+          <div class="winui-settings-card">
+            <div class="settings-card-left">
+              <div class="settings-card-title">Тема оформления</div>
+              <div class="settings-card-desc">Цветовая палитра интерфейса и консоли</div>
+            </div>
+            <div class="settings-card-control">
+              <select id="setting-theme">
+                <option value="fluent-dark">Windows 11 Dark</option>
+                <option value="fluent-light">Windows 11 Light (Контрастный)</option>
+                <option value="nord">Nord (Арктический синий)</option>
+                <option value="tokyo-night">Tokyo Night</option>
+                <option value="catppuccin">Catppuccin Mocha</option>
+                <option value="cyberpunk">Cyberpunk 2077</option>
+                <option value="combine">Combine Overwatch (Альянс)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Windows 11 Material -->
+          <div class="winui-settings-card">
+            <div class="settings-card-left">
+              <div class="settings-card-title">Материал окна</div>
+              <div class="settings-card-desc">Эффект стекла Windows 11</div>
+            </div>
+            <div class="settings-card-control">
+              <select id="setting-material">
+                <option value="mica">Mica (Слюда Windows 11)</option>
+                <option value="acrylic">Acrylic (Акриловое размытие)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Opacity -->
+          <div class="winui-settings-card">
+            <div class="settings-card-left">
+              <div class="settings-card-title">Прозрачность интерфейса</div>
+              <div class="settings-card-desc">Сквозная видимость рабочего стола</div>
+            </div>
+            <div class="settings-card-control">
+              <input type="range" id="setting-opacity" min="0.3" max="1" step="0.05" value="0.92">
+              <span id="setting-opacity-val" style="min-width: 42px; font-size: 12px; font-weight:600;">92%</span>
+            </div>
+          </div>
+
+          <div class="settings-section-title">ИИ-Помощник (Котик)</div>
+
+          <!-- API Key for Pet -->
+          <div class="winui-settings-card">
+            <div class="settings-card-left">
+              <div class="settings-card-title">API Ключ ИИ (Gemini / OpenAI)</div>
+              <div class="settings-card-desc">Для объяснения ошибок в консоли и общения с котиком</div>
+            </div>
+            <div class="settings-card-control" style="min-width: 220px;">
+              <input type="password" id="setting-apikey" placeholder="Вставьте ключ AIza... или sk-..." style="width: 100%;">
+            </div>
+          </div>
+
+          <!-- Custom AI Model Name -->
+          <div class="winui-settings-card">
+            <div class="settings-card-left">
+              <div class="settings-card-title">Модель ИИ (Название)</div>
+              <div class="settings-card-desc">Например: gemini-2.0-flash, gemini-1.5-pro, gpt-4o-mini, gpt-4o</div>
+            </div>
+            <div class="settings-card-control" style="min-width: 220px;">
+              <input type="text" id="setting-aimodel" placeholder="По умолчанию: gemini-2.0-flash" style="width: 100%;">
+            </div>
+          </div>
+
+          <div class="settings-section-title">Терминал и анимации</div>
+
+          <!-- Typewriter Effect Toggle -->
+          <div class="winui-settings-card">
+            <div class="settings-card-left">
+              <div class="settings-card-title">Эффект печати текста (Typewriter)</div>
+              <div class="settings-card-desc">Плавная кинематографичная анимация вывода команд</div>
+            </div>
+            <div class="settings-card-control">
+              <label class="switch">
+                <input type="checkbox" id="setting-typewriter">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Font -->
+          <div class="winui-settings-card">
+            <div class="settings-card-left">
+              <div class="settings-card-title">Шрифт терминала</div>
+              <div class="settings-card-desc">Моноширинный шрифт консоли</div>
+            </div>
+            <div class="settings-card-control">
+              <select id="setting-font">
+                <option value="Cascadia Code, Consolas, monospace">Cascadia Code</option>
+                <option value="Consolas, monospace">Consolas</option>
+                <option value="'Segoe UI Variable', monospace">Segoe UI Variable</option>
+                <option value="'Fira Code', monospace">Fira Code</option>
+                <option value="'JetBrains Mono', monospace">JetBrains Mono</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Font Size -->
+          <div class="winui-settings-card">
+            <div class="settings-card-left">
+              <div class="settings-card-title">Размер шрифта</div>
+              <div class="settings-card-desc">Масштаб символов в строке</div>
+            </div>
+            <div class="settings-card-control">
+              <input type="number" id="setting-fontsize" min="10" max="28" value="14" style="width: 80px;">
+            </div>
+          </div>
+
+          <!-- Cursor Style -->
+          <div class="winui-settings-card">
+            <div class="settings-card-left">
+              <div class="settings-card-title">Стиль курсора</div>
+              <div class="settings-card-desc">Форма указателя ввода</div>
+            </div>
+            <div class="settings-card-control">
+              <select id="setting-cursor">
+                <option value="bar">Вертикальная черта ( | )</option>
+                <option value="block">Прямоугольный блок ( █ )</option>
+                <option value="underline">Нижнее подчеркивание ( _ )</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Blinking Cursor -->
+          <div class="winui-settings-card">
+            <div class="settings-card-left">
+              <div class="settings-card-title">Мигание курсора</div>
+              <div class="settings-card-desc">Плавная пульсация курсора в терминале</div>
+            </div>
+            <div class="settings-card-control">
+              <label class="switch">
+                <input type="checkbox" id="setting-cursor-blink" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="settings-section-title">Виджеты боковой панели</div>
+
+          <!-- Widget: System -->
+          <div class="winui-settings-card">
+            <div class="settings-card-left">
+              <div class="settings-card-title">Монитор CPU и RAM</div>
+              <div class="settings-card-desc">Круглые индикаторы нагрузки ресурсов</div>
+            </div>
+            <div class="settings-card-control">
+              <label class="switch">
+                <input type="checkbox" id="widget-toggle-system" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Widget: Clock -->
+          <div class="winui-settings-card">
+            <div class="settings-card-left">
+              <div class="settings-card-title">Часы и аптайм</div>
+              <div class="settings-card-desc">Цифровое время, дата и время работы ПК</div>
+            </div>
+            <div class="settings-card-control">
+              <label class="switch">
+                <input type="checkbox" id="widget-toggle-clock" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Widget: Pet -->
+          <div class="winui-settings-card">
+            <div class="settings-card-left">
+              <div class="settings-card-title">Интерактивный питомец</div>
+              <div class="settings-card-desc">Компаньон, реагирующий на набор команд и ошибки</div>
+            </div>
+            <div class="settings-card-control">
+              <label class="switch">
+                <input type="checkbox" id="widget-toggle-pet" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Widget: Snippets -->
+          <div class="winui-settings-card">
+            <div class="settings-card-left">
+              <div class="settings-card-title">Быстрые команды</div>
+              <div class="settings-card-desc">Кнопки для быстрого запуска команд</div>
+            </div>
+            <div class="settings-card-control">
+              <label class="switch">
+                <input type="checkbox" id="widget-toggle-snippets" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Widget: Git -->
+          <div class="winui-settings-card">
+            <div class="settings-card-left">
+              <div class="settings-card-title">Git-статус</div>
+              <div class="settings-card-desc">Текущая ветка и число изменений</div>
+            </div>
+            <div class="settings-card-control">
+              <label class="switch">
+                <input type="checkbox" id="widget-toggle-git" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button id="btn-save-settings" class="fluent-btn primary">Применить и сохранить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dependencies -->
+  <script src="../../node_modules/@xterm/xterm/lib/xterm.js"></script>
+  <script src="../../node_modules/@xterm/addon-fit/lib/addon-fit.js"></script>
+  <script src="js/pet.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/widgets.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
